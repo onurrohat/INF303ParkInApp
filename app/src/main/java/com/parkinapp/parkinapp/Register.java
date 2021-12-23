@@ -1,17 +1,18 @@
+
 package com.parkinapp.parkinapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,76 +21,80 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
 
-    EditText fullName,editTextTextPersonName2,password,password2 ;
+    EditText fullName,password,password2 ;
     Button button ;
-    TextView textView2,textView4,textView3 ;
+    TextView mEmail,textView4,textView3,textView2 ;
     FirebaseAuth firebaseAuth ;
+    ProgressBar progressBar;
 
 
-    @SuppressLint("WrongViewCast")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        textView3 = findViewById(R.id.textView3) ;
-        fullName =  findViewById(R.id.fullName);
-        editTextTextPersonName2  =  findViewById(R.id.editTextTextPersonName2);
-        password =  findViewById(R.id.password);
-        password2 =findViewById(R.id.password2);
+        textView3 = findViewById(R.id.textView3);
+        fullName = findViewById(R.id.fullName);
+        textView2 = findViewById(R.id.textView2);
+        password = findViewById(R.id.password);
+        password2 = findViewById(R.id.password2);
         button = findViewById(R.id.button);
-        textView2 =findViewById(R.id.textView2);
-        textView4= findViewById(R.id.textView4);
+        mEmail = findViewById(R.id.mEmail);
+        textView4 = findViewById(R.id.textView4);
+        progressBar = findViewById(R.id.progressBar);
 
-        firebaseAuth = FirebaseAuth.getInstance() ;
+        firebaseAuth = FirebaseAuth.getInstance();
 
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
-                String email=editTextTextPersonName2.getText().toString().trim();
-                String passwordd=password.getText().toString().trim();
+                String email = textView2.getText().toString().trim();
+                String passwordd = password.getText().toString().trim();
 
 
-                if(TextUtils.isEmpty(email)) {
-                    editTextTextPersonName2.setError("Email is Required");
-                    return ;
+                if (TextUtils.isEmpty(email)) {
+                    textView2.setError("Email is Required");
+                    return;
 
                 }
 
-                if(TextUtils.isEmpty(passwordd)) {
+                if (TextUtils.isEmpty(passwordd)) {
 
                     password.setError("Password is Required");
 
                     return;
                 }
 
-                if(passwordd.length()<6) {
+                if (passwordd.length() < 6) {
 
                     password.setError("Password Must be >= 6 Characters");
 
                     return;
                 }
 
-              //  firebaseAuth.createUserWithEmailAndPassword(email,passwordd).addOnCompleteListener(new OnCompleteListener<AuthResult>()) {
-                    //@Override
-                    //public void onComplete(@NonNull Task<AuthResult> task) {
+                progressBar.setVisibility(View.VISIBLE);
 
-                       // if(task.İsSuccessful()) {
+                firebaseAuth.createUserWithEmailAndPassword(email, passwordd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            Toast.makeText(Register.this,"User Created" ,Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
 
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        } else {
+                            Toast.makeText(Register.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                        //else{
-                         //   Toast.makeText(Register.this,"Error !"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        //}
+
+                    }
+
+                });
+            }
+        });
 
 
-
-
-
-            }); } }
-
-
-
+    }}
