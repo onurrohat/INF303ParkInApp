@@ -1,0 +1,51 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="htpp:schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:rotationX="-8"
+    tools:context=".MapsActivity">
+    <LinearLayout xmlns:android="htpp://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <fragment xmlns:android="htpp://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        tools:context="com.example.myapplication.MapsActivity"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="409dp"
+        android:layout_height="584dp"
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="36dp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="34dp">
+
+        <Button
+            android:id="@+id/zoomout"
+            android:layout_width="216dp"
+            android:layout_height="140dp"
+            android:onClick="onZoom"
+            android:text="Zoom out"
+            tools:layout_editor_absoluteX="259dp"
+            tools:layout_editor_absoluteY="38dp" />
+
+
+        <Button
+            android:id="@+id/zoomIn"
+            android:layout_width="202dp"
+            android:layout_height="match_parent"
+            android:onClick="onZoom"
+            android:text="Zoom In"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="29dp" />
