@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -99,7 +100,13 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
 
-                                Toast.makeText(Login.this)
+                                Toast.makeText(Login.this,"Reset Link Sent To Your Email",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }) .addOnFailureListener (new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Login.this,"Error! Reset The Link"+e.getMessage(),Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -112,6 +119,8 @@ public class Login extends AppCompatActivity {
                         //close the dialog
                     }
                 });
+
+                passwordResetDialog.create().show();
 
             }
         });
