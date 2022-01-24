@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     //Initialize Map
-    EditText etSource,etDestination;
+    EditText etSource;
     Button btTrack;
 
     @Override
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Assign variable
         etSource = findViewById(R.id.et_source);
-        etDestination = findViewById(R.id.et_destination);
         btTrack =  findViewById(R.id.bt_track);
 
        btTrack.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
                //Check condition
                if(sSource.equals("") ){
-                   //When both values empty
+                   //Empty Standort info
 
                    Toast.makeText(getApplicationContext(), "Geben Sie Ihre Standort", Toast.LENGTH_SHORT).show();
                }else{
